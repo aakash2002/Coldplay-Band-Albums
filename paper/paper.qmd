@@ -1,8 +1,9 @@
 ---
-title: "Analysis of ColdPlay band musics"
+title: "Analysis of Coldplay Band Albums"
 author: 
   - Aakash Vaithyanathan
   - Kevin Cai
+  - Bolin Shen
 thanks: "Code and data are available at: [Code](https://github.com/aakash2002/STA304-W5)."
 date: today
 date-format: long
@@ -24,18 +25,21 @@ library(knitr)
 data <- readRDS(here::here("data/analysis_data/coldplay_cleaned_data.rds"))
 ```
 
-# Introduction[intro]
-This paper presents an analysis of Coldplay's albums from 2000 to 2024, using data collected from the Spotify API. The dataset was processed and cleaned in R to explore trends in the band's music, focusing on key attributes including key notes, energy of the songs, and tempo. 
+# Introduction{#intro}
+
+Coldplay is a alternative rock band with many popular songs made available on various streaming platforms. One of the most popular streaming platform is Spotify @spotify.
+
+In this paper, we make use of Spotify's developer API @spotifyDev to get access to various parameters part of a song for the artist between the year 2000 to 2024. In this paper, we present some graphs to highlight some of our findings and discuss about them from the artist Coldplay. The dataset was made available using Spotify Developer API. Parts of the code were written with the help of @citeR and its supported packages like knitR @knitr, ggplot2 graphing package @ggplot2 and tidyverse @tidyverse. Data cleaning steps were done using the janitor @janitor package.
 
 @tbl-sample-data shows a sample of the dataset used. 
 
 
-# Data & Results[data]
+# Data & Results{#data}
 
 ## Energy of song and it's duration
 ```{r}
 #| label: fig-energy-duration
-#| fig-cap: Relationship between energy of song and its duration in minutes
+#| fig-cap: "Relationship between energy of song and its duration in minutes"
 #| echo: false
 #| warning: false
 #| message: false
@@ -49,7 +53,7 @@ ggplot(data, aes(x = duration_min, y = energy)) +
 
 
 ```
-The above graph shows the relationship between the duration of a song to its energy. The energy of a song corresponds to its combined intensity and it's vigor (@energyOfSong). As we can see, many songs have high energy values between the range 3 to 5 minutes. The band Coldplay (@coldplay) is an alternative rock style band and the findings make sense as these songs have a strong impact on our relative mood and the energy we experience. We also notice that as the duration of the song decreases, many albums/songs have relatively low energy levels.
+@fig-energy-duration shows the relationship between the duration of a song to its energy. The energy of a song corresponds to its combined intensity and it's vigor (@energyOfSong). As we can see, many songs have high energy values between the range 3 to 5 minutes. The band Coldplay (@coldplay) is an alternative rock style band and the findings make sense as these songs have a strong impact on our relative mood and the energy we experience. We also notice that as the duration of the song decreases, many albums/songs have relatively low energy levels.
 
 ```{r, message=FALSE, echo=FALSE}
 #| label: fig-tempo
@@ -66,9 +70,10 @@ ggplot(data, aes(x = `album_release_year`, y = `tempo`)) +
   theme_minimal()
 ```
 
+## Tempo and Album Release Year
 From @fig-tempo, we can see that there are noticeable changes in the tempo of Coldplay's albums over the years. The green regression line shows a trend of decreasing tempo, from 130 BPM in 2000 to 119 BPM in 2024—a reduction of 11 BPM over 24 years. This suggests that the band's style is shifting toward producing slower BPM songs. It is also worth noting that the regression line's trend does not hold for the years 2019 and 2021, where the tempo is significantly higher than in surrounding years. Further investigation is needed to understand the potential cause of this anomaly.
 
-# Appendix
+# Appendix{#appendix}
 ```{r, message = FALSE, echo = FALSE}
 #| label: tbl-sample-data
 #| tbl-cap: "Sample of Coldplay Album Data, 2000-2024"
@@ -77,4 +82,4 @@ head(data) |>
 ```
 
 \newpage
-# References[ref]
+# References{#ref}
