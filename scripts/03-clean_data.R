@@ -9,36 +9,25 @@
 
 #### Workspace setup ####
 library(tidyverse)
+library(janitor)
+library(spotifyr)
 
 #### Clean data ####
-raw_data <- read_csv("inputs/data/plane_data.csv")
+raw_data <- readRDS("data/raw_data/coldplay.rds")
 
 cleaned_data <-
   raw_data |>
-  janitor::clean_names() |>
-  select(wing_width_mm, wing_length_mm, flying_time_sec_first_timer) |>
-  filter(wing_width_mm != "caw") |>
-  mutate(
-    flying_time_sec_first_timer = if_else(flying_time_sec_first_timer == "1,35",
-                                   "1.35",
-                                   flying_time_sec_first_timer)
-  ) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "490",
-                                 "49",
-                                 wing_width_mm)) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "6",
-                                 "60",
-                                 wing_width_mm)) |>
-  mutate(
-    wing_width_mm = as.numeric(wing_width_mm),
-    wing_length_mm = as.numeric(wing_length_mm),
-    flying_time_sec_first_timer = as.numeric(flying_time_sec_first_timer)
-  ) |>
-  rename(flying_time = flying_time_sec_first_timer,
-         width = wing_width_mm,
-         length = wing_length_mm
-         ) |> 
-  tidyr::drop_na()
+  janitor::clean_names()
+
+cleaned_data$duration_min <- cleaned_data$duration_ms / 60000
+
+cleaned_data <- 
+  cleaned_data |>
+    select(album_release_year, liveness, energy, valence, tempo, duration_min, key_mode)
+
+cleaned_data <- 
+  cleaned_data |> drop_na()
+  
 
 #### Save data ####
-write_csv(cleaned_data, "outputs/data/analysis_data.csv")
+saveRDS(cleaned_data, "data/analysis_data/coldplay_cleaned_data.rds")

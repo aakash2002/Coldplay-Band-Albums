@@ -1,26 +1,23 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Downloads and saves the data from Spotify Developer API
+# Author: Aakash Vaithyanathan, Kevin Cai 
+# Date: October 10, 2024
+# Contact: aakash.vaithyanathan@mail.utoronto.ca, kevin.cai@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: 1) Login in Spotify Developer API and make an app. 2) Save your client ID and secret key into environment file
+# Any other information needed? None
 
 
 #### Workspace setup ####
-library(opendatatoronto)
 library(tidyverse)
-# [...UPDATE THIS...]
+library(devtools)
+library(spotifyr)
+library(rvest)
 
-#### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
+#### Download Coldplay artist spotify data ####
+coldplay <- get_artist_audio_features("coldplay")
 
-
-
-#### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
+# Save the data
+saveRDS(coldplay, "data/raw_data/coldplay.rds")
 
          
