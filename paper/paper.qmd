@@ -4,7 +4,7 @@ author:
   - Aakash Vaithyanathan
   - Kevin Cai
   - Bolin Shen
-thanks: "Code and data are available at: [Code](https://github.com/aakash2002/STA304-W5)."
+thanks: "Code and data are available at: [Code](https://github.com/aakash2002/Coldplay-Band-Albums)."
 date: today
 date-format: long
 format: pdf
