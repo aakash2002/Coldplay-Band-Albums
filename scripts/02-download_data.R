@@ -1,8 +1,8 @@
 #### Preamble ####
 # Purpose: Downloads and saves the data from Spotify Developer API
-# Author: Aakash Vaithyanathan, Kevin Cai 
+# Author: Aakash Vaithyanathan, Kevin Cai, Bolin Shen 
 # Date: October 10, 2024
-# Contact: aakash.vaithyanathan@mail.utoronto.ca, kevin.cai@mail.utoronto.ca
+# Contact: aakash.vaithyanathan@mail.utoronto.ca, kevin.cai@mail.utoronto.ca, bolin.shen@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: 1) Login in Spotify Developer API and make an app. 2) Save your client ID and secret key into environment file
 # Any other information needed? None
