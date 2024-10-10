@@ -81,5 +81,7 @@ head(data) |>
   kable(col.names = c("Album Release Year", "Liveness", "Energy", "Valence", "Tempo (BPM)", "Duration Min", "Key Mode"))
 ```
 
+The starter code as well as the data presentation and analysis techniques used are from Telling Stories with Data (@citeRohan).
+
 \newpage
 # References{#ref}
