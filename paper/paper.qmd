@@ -27,6 +27,7 @@ data <- readRDS(here::here("data/analysis_data/coldplay_cleaned_data.rds"))
 
 # Introduction[intro]
 
+
 # Data & Results[data]
 
 ## Energy of song and it's duration
