@@ -1,13 +1,11 @@
 ---
 title: "Analysis of ColdPlay band musics"
-subtitle: "My subtitle if needed"
 author: 
   - Aakash Vaithyanathan
   - Kevin Cai
 thanks: "Code and data are available at: [Code](https://github.com/aakash2002/STA304-W5)."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -21,11 +19,15 @@ bibliography: references.bib
 library(tidyverse)
 library(ggplot2)
 library(here)
+library(knitr)
 
 data <- readRDS(here::here("data/analysis_data/coldplay_cleaned_data.rds"))
 ```
 
 # Introduction[intro]
+This paper presents an analysis of Coldplay's albums from 2000 to 2024, using data collected from the Spotify API. The dataset was processed and cleaned in R to explore trends in the band's music, focusing on key attributes including key notes, energy of the songs, and tempo. 
+
+@tbl-sample-data shows a sample of the dataset used. 
 
 # Data & Results[data]
 
@@ -48,12 +50,30 @@ ggplot(data, aes(x = duration_min, y = energy)) +
 ```
 The above graph shows the relationship between the duration of a song to its energy. The energy of a song corresponds to its combined intensity and it's vigor (@energyOfSong). As we can see, many songs have high energy values between the range 3 to 5 minutes. The band Coldplay (@coldplay) is an alternative rock style band and the findings make sense as these songs have a strong impact on our relative mood and the energy we experience. We also notice that as the duration of the song decreases, many albums/songs have relatively low energy levels.
 
+```{r, message=FALSE, echo=FALSE}
+#| label: fig-tempo
+#| fig-cap: "Coldplay Album Tempo Over the Years 2000-2024"
+ggplot(data, aes(x = `album_release_year`, y = `tempo`)) +
+  geom_line(color = "blue") +       
+  geom_point(color = "red") +       
+  geom_smooth(method = "lm", color = "green", se = FALSE) + 
+  labs(title = "Tempo Over the Years with Regression Line",
+       x = "Album Release Year",
+       y = "Tempo (BPM)") +
+  scale_x_continuous(breaks = seq(min(data$album_release_year), max(data$album_release_year), by = 2)) + 
+  scale_y_continuous(breaks = seq(floor(min(data$tempo)), ceiling(max(data$tempo)), by = 10)) + 
+  theme_minimal()
+```
 
-\newpage
-
-
-# References[ref]
+From @fig-tempo, we can see that there are noticeable changes in the tempo of Coldplay's albums over the years. The green regression line shows a trend of decreasing tempo, from 130 BPM in 2000 to 119 BPM in 2024—a reduction of 11 BPM over 24 years. This suggests that the band's style is shifting toward producing slower BPM songs. It is also worth noting that the regression line's trend does not hold for the years 2019 and 2021, where the tempo is significantly higher than in surrounding years. Further investigation is needed to understand the potential cause of this anomaly.
 
 # Appendix
+```{r, message = FALSE, echo = FALSE}
+#| label: tbl-sample-data
+#| tbl-cap: "Sample of Coldplay Album Data, 2000-2024"
+head(data) |> 
+  kable(col.names = c("Album Release Year", "Liveness", "Energy", "Valence", "Tempo (BPM)", "Duration Min", "Key Mode"))
+```
 
-
+\newpage
+# References[ref]
